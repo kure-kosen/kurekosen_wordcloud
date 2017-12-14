@@ -31,10 +31,10 @@ for file in files:
     if file == ".DS_Store":
         continue
 
-    
-    with open("wordlist/" + file, "r") as f:
-        line = f.readline().replace("\n", "")
-        wordlists.append(line)
+    if 'diary|2012' in file:    
+        with open("wordlist/" + file, "r") as f:
+            line = f.readline().replace("\n", "")
+            wordlists.append(line)
 
 # wordlist = get_wordlist_from_QiitaURL("https://www.kure-nct.ac.jp/")
 # print(wordlist)
