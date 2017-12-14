@@ -14,7 +14,7 @@ def create_wordcloud(text):
              'くれる', 'やる', 'くださる', 'そう', 'せる', 'した',  '思う',
              'それ', 'ここ', 'ちゃん', 'くん', '', 'て', 'に', 'を', 'は', 'の', 'が', 'と', 'た', 'し', 'で',
              'ない', 'も', 'な', 'い', 'か', 'ので', 'よう', 'ブック', '開く', '平成', '年度',
-             '委員']
+             '委員', '高専', 'KOUSEN', 'KUREKOUSEN', 'でき', 'なり', 'あり', '入学', '案内', '参加']
 
     wordcloud = WordCloud(background_color="white",font_path=fpath, width=900, height=500, stopwords=set(stop_words)).generate(text)
 
