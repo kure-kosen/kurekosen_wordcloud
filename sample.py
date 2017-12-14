@@ -21,8 +21,9 @@ def mecab_analysis(text):
 
 def get_wordlist_from_QiitaURL(url):
     res = requests.get(url)
+    res.encoding = res.apparent_encoding
     soup = BeautifulSoup(res.text, "html.parser")
-    text = soup.body.section.get_text().replace('\n','').replace('\t','')
+    text = soup.body.get_text().replace('\n','').replace('\t','')
     return mecab_analysis(text)
 
 def create_wordcloud(text):
@@ -44,6 +45,6 @@ def create_wordcloud(text):
     plt.axis("off")
     plt.show()
 
-url = "http://qiita.com/t_saeko/items/2b475b8657c826abc114"
+url = "https://www.kure-nct.ac.jp"
 wordlist = get_wordlist_from_QiitaURL(url)
 create_wordcloud(" ".join(wordlist))
