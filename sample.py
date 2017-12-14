@@ -31,7 +31,7 @@ for file in files:
     if file == ".DS_Store":
         continue
 
-    if 'diary|2014' in file:    
+    if 'diary|2015' in file:    
         with open("wordlist/" + file, "r") as f:
             line = f.readline().replace("\n", "")
             wordlists.append(line)
