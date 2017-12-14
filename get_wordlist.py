@@ -29,6 +29,8 @@ def get_wordlist_from_QiitaURL(url):
 
     res.encoding = res.apparent_encoding
     soup = BeautifulSoup(res.text, "html.parser")
+    [script.extract() for script in soup.find_all("script")]
+    [style.extract() for style in soup.find_all("style")]
 
     if soup.body == None:
         return []
