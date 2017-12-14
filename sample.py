@@ -14,7 +14,8 @@ def create_wordcloud(text):
              'くれる', 'やる', 'くださる', 'そう', 'せる', 'した',  '思う',
              'それ', 'ここ', 'ちゃん', 'くん', '', 'て', 'に', 'を', 'は', 'の', 'が', 'と', 'た', 'し', 'で',
              'ない', 'も', 'な', 'い', 'か', 'ので', 'よう', 'ブック', '開く', '平成', '年度',
-             '委員', '高専', 'KOUSEN', 'KUREKOUSEN', 'でき', 'なり', 'あり', '入学', '案内', '参加']
+             '委員', '高専', 'KOUSEN', 'KUREKOUSEN', 'でき', 'なり', 'あり', '入学', '案内', '参加',
+             'TOP', '最新', 'ページ', 'co', 'ba']
 
     wordcloud = WordCloud(background_color="white",font_path=fpath, width=900, height=500, stopwords=set(stop_words)).generate(text)
 
@@ -30,10 +31,10 @@ for file in files:
     if file == ".DS_Store":
         continue
 
-    if 'diary' in file:
-        with open("wordlist/" + file, "r") as f:
-            line = f.readline().replace("\n", "")
-            wordlists.append(line)
+    
+    with open("wordlist/" + file, "r") as f:
+        line = f.readline().replace("\n", "")
+        wordlists.append(line)
 
 # wordlist = get_wordlist_from_QiitaURL("https://www.kure-nct.ac.jp/")
 # print(wordlist)

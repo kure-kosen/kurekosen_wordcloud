@@ -31,11 +31,9 @@ def get_wordlist_from_QiitaURL(url):
     soup = BeautifulSoup(res.text, "html.parser")
     [script.extract() for script in soup.find_all("script")]
     [style.extract() for style in soup.find_all("style")]
-
-    if soup.body == None:
-        return []
+    [head.extract() for head in soup.find_all("head")]
     
-    text = soup.body.get_text().replace('\n','').replace('\t','')
+    text = soup.get_text().replace('\n','').replace('\t','')
     return mecab_analysis(text)
 
 def main():
