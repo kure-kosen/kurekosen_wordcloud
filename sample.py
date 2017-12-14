@@ -51,19 +51,21 @@ def create_wordcloud(text):
 def extract_link_from_url(url):
     res = requests.get(url)
     res.encoding = res.apparent_encoding
-    soup = BeautifulSoup(res.text, "html.parser")
+    soup = BeautifulSoup(res.text, "lxml")
 
     urls = set()
     for a in soup.find_all('a'):
         href = urljoin(url, a.get('href'))
-        if re.match(r"^(https://www\.kure-nct\.ac\.jp/).*(?!pdf)$", href):
+        if re.match(r"^(https://www\.kure-nct\.ac\.jp/).*(\.html)$", href):
             urls.add(href)
 
     return urls
 
-def set_visited_urls(parent_url):
+def set_visited_urls():
     url_list = set()
-    url_list.add(parent_url)
+    url_list.add("https://www.kure-nct.ac.jp/")
+    # IWだけaタグのリンク先でredirectさせててアクセスできてなかったので追加
+    url_list.add("https://www.kure-nct.ac.jp/incubation/H29_top/index.html")
 
     while(not len(url_list) == 0):
         url = url_list.pop()
@@ -79,12 +81,11 @@ def set_visited_urls(parent_url):
 
     return
 
-
-parent_url = "https://www.kure-nct.ac.jp"
 visited_urls = set()
-set_visited_urls(parent_url)
+set_visited_urls()
 
-print(visited_urls)
+with open("url.txt", "w") as file:
+    file.writelines("\n".join(visited_urls))
 
 # wordlist = get_wordlist_from_QiitaURL(url)
 # create_wordcloud(" ".join(wordlist))
