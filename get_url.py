@@ -13,6 +13,7 @@ def extract_link_from_url(url):
     urls = set()
     for a in soup.find_all('a'):
         href = urljoin(url, a.get('href'))
+        # 呉高専のドメインのhtmlファイルのみ収集する
         if re.match(r"^(https://www\.kure-nct\.ac\.jp/).*(\.html)$", href):
             urls.add(href)
 

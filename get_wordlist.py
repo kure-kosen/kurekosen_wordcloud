@@ -22,15 +22,21 @@ def mecab_analysis(text):
             break
     return output
 
-def get_wordlist_from_QiitaURL(url):
+def get_wordlist_from_url(url):
     res = requests.get(url)
     if not res.status_code == 200:
         return []
 
     res.encoding = res.apparent_encoding
     soup = BeautifulSoup(res.text, "html.parser")
+
+    # scriptタグの情報を排除する
     [script.extract() for script in soup.find_all("script")]
+
+    # styleタグの情報を排除する
     [style.extract() for style in soup.find_all("style")]
+
+    # headタグの情報を排除する
     [head.extract() for head in soup.find_all("head")]
     
     text = soup.get_text().replace('\n','').replace('\t','')
@@ -44,11 +50,12 @@ def main():
             url = url.replace("\n", '')
             print(url)
 
-            wordlist = get_wordlist_from_QiitaURL(url)
+            wordlist = get_wordlist_from_url(url)
             if not len(wordlist) == 0:
+                # /だとファイルを開けないのでとりあえず|に置換している
                 with open("wordlist/" + url.replace("/", "|") + ".txt", "w") as word_file:
                     word_file.write(" ".join(wordlist))
-                    time.sleep(1)
+                    time.sleep(1) # ここ忘れずに！！！！
 
             url = url_file.readline()
 
